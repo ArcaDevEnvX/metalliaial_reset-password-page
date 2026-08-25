@@ -78,27 +78,32 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // 1. Estrae i parametri dalla querystring (es. ?token=XYZ)
-            const urlParams = new URLSearchParams(window.location.search);
+            // Legge la query string rimuovendo l'eventuale # finale
+            let search = window.location.search;
+            if (!search && window.location.hash) {
+                // Se i parametri finiscono dopo il # per errore
+                search = window.location.hash.substring(1);
+            }
+    
+            const urlParams = new URLSearchParams(search);
             const token = urlParams.get('token');
-            const cd_xadxutente = urlParams.get('cd_xadxutente');
-
+            const utente = urlParams.get('cd_xadxutente');
+    
             const btn = document.getElementById('open-app-btn');
-            const errorMsg = document.getElementById('error-message');
-
+    
             if (token) {
-                // Costruisce il Custom Scheme per Flutter
-                const customSchemeUrl = `miaapp://reset-password?cd_xadxutente=${encodeURIComponent(cd_xadxutente)?token=${encodeURIComponent(token)}`;
-
-                // Assegna l'URL al pulsante manuale
-                btn.href = customSchemeUrl;
-
-                // 2. Tenta il reindirizzamento automatico all'app Flutter
+                // Ricostruisce il link con lo schema Custom della tua app Flutter
+                // N.B. Verifica che il tuo Custom Scheme sia proprio "miaapp" o quello che hai configurato su Android/iOS!
+                let customSchemeUrl = `metelliaial://reset-password?token=${encodeURIComponent(token)}`;
+                
+                if (utente) {
+                    customSchemeUrl += `&cd_xadxutente=${encodeURIComponent(utente)}`;
+                }
+    
+                if (btn) btn.href = customSchemeUrl;
+    
+                // Reindirizzamento automatico
                 window.location.href = customSchemeUrl;
-            } else {
-                // Se non c'è il token nell'URL della pagina web
-                btn.style.display = 'none';
-                errorMsg.style.display = 'block';
             }
         });
     </script>
