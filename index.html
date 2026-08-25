@@ -86,19 +86,16 @@
             }
     
             const urlParams = new URLSearchParams(search);
-            const token = urlParams.get('token');
+            
             const utente = urlParams.get('cd_xadxutente');
+            const token = urlParams.get('token');
     
             const btn = document.getElementById('open-app-btn');
     
             if (token) {
                 // Ricostruisce il link con lo schema Custom della tua app Flutter
                 // N.B. Verifica che il tuo Custom Scheme sia proprio "miaapp" o quello che hai configurato su Android/iOS!
-                let customSchemeUrl = `metelliaial://reset-password?token=${encodeURIComponent(token)}`;
-                
-                if (utente) {
-                    customSchemeUrl += `&cd_xadxutente=${encodeURIComponent(utente)}`;
-                }
+                let customSchemeUrl = `metelliaial://reset-password?token=cd_xadxutente=${encodeURIComponent(utente)}&${encodeURIComponent(token)}`;
     
                 if (btn) btn.href = customSchemeUrl;
     
