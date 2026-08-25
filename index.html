@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripristino Password - MiaApp</title>
+    <title>Ripristino Password - MetelliaIAL</title>
     <style>
         * {
             box-sizing: border-box;
@@ -81,13 +81,14 @@
             // 1. Estrae i parametri dalla querystring (es. ?token=XYZ)
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
+            const cd_xadxutente = urlParams.get('cd_xadxutente');
 
             const btn = document.getElementById('open-app-btn');
             const errorMsg = document.getElementById('error-message');
 
             if (token) {
                 // Costruisce il Custom Scheme per Flutter
-                const customSchemeUrl = `miaapp://reset-password?token=${encodeURIComponent(token)}`;
+                const customSchemeUrl = `miaapp://reset-password?cd_xadxutente=${encodeURIComponent(cd_xadxutente)?token=${encodeURIComponent(token)}`;
 
                 // Assegna l'URL al pulsante manuale
                 btn.href = customSchemeUrl;
