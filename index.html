@@ -95,7 +95,7 @@
             if (token) {
                 // Ricostruisce il link con lo schema Custom della tua app Flutter
                 // N.B. Verifica che il tuo Custom Scheme sia proprio "miaapp" o quello che hai configurato su Android/iOS!
-                let customSchemeUrl = `metelliaial://reset-password?token=cd_xadxutente=${encodeURIComponent(utente)}&${encodeURIComponent(token)}`;
+                let customSchemeUrl = `metelliaial://reset-password?cd_xadxutente=${encodeURIComponent(utente)}&token=${encodeURIComponent(token)}`;
     
                 if (btn) btn.href = customSchemeUrl;
     
